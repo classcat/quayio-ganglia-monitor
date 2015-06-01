@@ -6,6 +6,7 @@
 ########################################################################
 
 #--- HISTORY -----------------------------------------------------------
+# 02-jun-15 : Change the script so that supservisor will not care gmon.
 # 02-jun-15 : fixed.
 #-----------------------------------------------------------------------
 
@@ -94,8 +95,8 @@ function proc_supervisor () {
 [program:ssh]
 command=/usr/sbin/sshd -D
 
-[program:gmon]
-command=service ganglia-monitor restart
+#[program:gmon]
+#command=service ganglia-monitor restart
 
 [program:rsyslog]
 command=/usr/sbin/rsyslogd -n

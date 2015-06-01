@@ -7,6 +7,7 @@ MAINTAINER ClassCat Co.,Ltd. <support@classcat.com>
 ########################################################################
 
 #--- HISTORY -----------------------------------------------------------
+# 02-jun-15 : Kick gmond at CMD.
 # 02-jun-15 : fixed.
 #-----------------------------------------------------------------------
 
@@ -29,4 +30,4 @@ ADD assets/cc-init.sh /opt/cc-init.sh
 
 EXPOSE 22
 
-CMD /opt/cc-init.sh; /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+CMD /opt/cc-init.sh; service ganglia-monitor restart; /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
