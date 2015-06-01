@@ -48,7 +48,8 @@ function put_public_key() {
 
 function config_ganglia_monitor() {
 
-cat << _EOT_ > /etc/ganglia/conf.d/cc-gmond.conf
+  mkdir -p /etc/ganglia/conf.d
+  cat << _EOT_ > /etc/ganglia/conf.d/cc-gmond.conf
 cluster { 
   name = "${CLUSTER_NAME}" 
   /* name = "unspecified" */
