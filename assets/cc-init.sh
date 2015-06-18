@@ -6,6 +6,7 @@
 ########################################################################
 
 #--- HISTORY -----------------------------------------------------------
+# 18-jun-15 : skip configuraton on the start method.
 # 02-jun-15 : Change the script so that supservisor will not care gmon.
 # 02-jun-15 : fixed.
 #-----------------------------------------------------------------------
@@ -49,6 +50,11 @@ function put_public_key() {
 
 function config_ganglia_monitor() {
 
+  if [ -e /etc/ganglia/conf.d/cc-gmond.conf ]; then
+    echo "ClassCat Warning >> /etc/ganglia/conf.d/cc-gmond.conf found, then skip configuration."
+    return
+  fi
+
   mkdir -p /etc/ganglia/conf.d
   cat << _EOT_ > /etc/ganglia/conf.d/cc-gmond.conf
 cluster { 
@@ -91,6 +97,11 @@ _EOT_
 # See http://docs.docker.com/articles/using_supervisord/
 
 function proc_supervisor () {
+  if [ -e /etc/supervisor/conf.d/supervisord.conf ]; then
+    echo "ClassCat Warning >> /etc/supervisor/conf.d/supervisord.conf found, then skip configuration."
+    return
+  fi
+
   cat > /etc/supervisor/conf.d/supervisord.conf <<EOF
 [program:ssh]
 command=/usr/sbin/sshd -D
